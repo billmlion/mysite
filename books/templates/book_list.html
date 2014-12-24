@@ -1,0 +1,17 @@
+{% load pagination_tags %}
+{% autopaginate book_list 5 %}
+   {% if book_list %}
+ <p>Found {{ book_list|length }} book{{ book_list|pluralize }}.</p>
+ <ul>
+ {% for book in book_list %}
+ <li>{{ book.title }}</li>
+ {% endfor %}
+ </ul>
+
+{% else %}
+ <p>No books.</p>
+{% endif %}
+ {% paginate %}
+
+-----------------------------------------
+ <a href="/logout">logout</a>
