@@ -7,6 +7,20 @@ class UserProfileManager(models.Manager):
       cursor.execute("select username,website,nickname from auth_user,books_publisher,books_info where books_publisher.id = auth_user.id and books_info.id = auth_user.id")
       return [row for row in cursor.fetchone()]
 
+class BooksLogManager(models.Manager):
+    """docstring for UserLogManager"""
+    def getUserProfile(self,name):
+      cursor = connection.cursor()
+      cursor.execute("select username,log_info from auth_user,books_log where auth_user.id = books_log.id")
+      return [row for row in cursor.fetchone()]
+                    
+class CCLogManager(models.Manager):
+    """docstring for UserLogManager"""
+    def getUserProfile(self,name):
+      cursor = connection.cursor()
+      cursor.execute("select username,log_info from auth_user,cc_log where auth_user.id = cc_log.id")
+      return [row for row in cursor.fetchone()]    
+
 # Create your models here.
 class Publisher(models.Model):
     name = models.CharField(max_length=30)
@@ -40,4 +54,7 @@ class UserProfile(models.Model):
     nickname = models.CharField(max_length=50)
     username = models.CharField(max_length=30)
     website = models.CharField(max_length=200)
-    objects = UserProfileManager()
+    objects = models.Manager()
+    upf_objects = UserProfileManager()
+    bl_objects = BooksLogManager()
+    cc_objects = CCLogManager()
