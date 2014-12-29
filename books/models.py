@@ -57,4 +57,4 @@ class UserProfile(models.Model):
     objects = models.Manager()
     upf_objects = UserProfileManager()
     bl_objects = BooksLogManager()
-    cc_objects = CCLogManager()
+    ccl_objects = CCLogManager()
