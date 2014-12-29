@@ -1,4 +1,14 @@
 from django.db import models
+from django.db import connection,models
+
+# Create your manager here.
+class UserProfileManager(models.Manager):
+    def getUserProfile(self,name):
+      cursor = connection.cursor()
+      cursor.execute("select username,website,nickname from auth_user,books_publisher,books_info where books_publisher.id = auth_user.id and books_info.id = auth_user.id")
+      return [row for row in cursor.fetchone()]
+
+
 
 # Create your models here.
 class Publisher(models.Model):
@@ -28,3 +38,9 @@ class Book(models.Model):
 
     def __unicode__(self):
       return self.title
+
+class UserProfile(models.Model):
+    nickname = models.CharField(max_length=50)
+    username = models.CharField(max_length=30)
+    website = models.CharField(max_length=200)
+    objects = UserProfileManager()
