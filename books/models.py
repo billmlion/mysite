@@ -1,4 +1,5 @@
-from django.db import model,connection
+from django.db import models
+from django.db import connection,models
 
 class UserProfileManager(models.Manager):
     def getUserProfile(self,name):
