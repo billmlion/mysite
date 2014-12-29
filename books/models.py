@@ -1,14 +1,10 @@
-from django.db import models
-from django.db import connection,models
+from django.db import model,connection
 
-# Create your manager here.
 class UserProfileManager(models.Manager):
     def getUserProfile(self,name):
       cursor = connection.cursor()
       cursor.execute("select username,website,nickname from auth_user,books_publisher,books_info where books_publisher.id = auth_user.id and books_info.id = auth_user.id")
       return [row for row in cursor.fetchone()]
-
-
 
 # Create your models here.
 class Publisher(models.Model):
