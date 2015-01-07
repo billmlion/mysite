@@ -4,6 +4,7 @@ from books import views
 from django.contrib import auth
 from mysite.views import hello
 from django.contrib.auth.views import login, logout
+admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
@@ -15,7 +16,9 @@ urlpatterns = patterns('',
     #use for login and logout 
     (r'^accounts/login/$',login),
     (r'^accounts/logout/$',logout),
+
     (r'^logout/$',views.logout_view),
+    (r'^login_view/$',views.login_view),#custom login process
     #('^hello/$', hello),
     (r'^search-form/$', views.search_form),
     (r'^search/$',views.search),

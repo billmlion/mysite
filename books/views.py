@@ -12,6 +12,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import auth
+from django.views.decorators.csrf import csrf_exempt
 
 
 
@@ -85,4 +86,17 @@ def logout_view(request):
     auth.logout(request)
     # Redirect to a success page.
     return HttpResponseRedirect("/accounts/login/")
+
+@csrf_exempt
+def login_view(request):
+    username = request.POST.get('username','')
+    password = request.POST.get('password','')
+    user = auth.authenticate(username=username,password=password)
+    if user is not None and user.is_active:
+      auth.login(request, user)
+      return  HttpResponseRedirect("/books")
+    else:
+      return HttpResponseRedirect("/accounts/login/")
+
+
 
