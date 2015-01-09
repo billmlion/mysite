@@ -16,7 +16,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 
-def UploadImage(request): 
+def UploadImage(request):
     '''UploadImage function do not work!!!'''
     if request.method == 'POST':
         content = request.FILES['ImageField']
@@ -53,10 +53,12 @@ def contact(request):
            #  cd.get('email', 'noreply@example.com'),
            #  ['siteowner@example.com'],
            # )
-           return HttpResponseRedirect('/thanks/')
+           return HttpResponseRedirect("/books")
+        else:
+            return render_to_response('contact_form.html', {'form': form},context_instance=RequestContext(request))
     else:
         form = ContactForm(initial={'subject': 'I love your site!'})
-        return render_to_response('contact_form.html', {'form': form})
+        return render_to_response('contact_form.html', {'form': form},context_instance=RequestContext(request))
 
 
 @login_required
@@ -69,7 +71,7 @@ def getBooks(request):
 
 
 
- 
+
 def register(request):
     '''user register'''
     if request.method == 'POST':
