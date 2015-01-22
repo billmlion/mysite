@@ -1,0 +1,17 @@
+ 
+   {% if article_list %}
+ <p>Found {{ article_list|length }} article{{ article_list|pluralize }}.</p>
+ <ul>
+ {% for article in article_list %}
+ <li>{{ article.headline }} <a href='{% url "updateArticle" article.id %}'>修改</a></li>
+ 
+ {% endfor %}
+ </ul>
+
+{% else %}
+ <p>No articles.</p>
+{% endif %}
+ 
+
+-----------------------------------------
+ <a href="/logout">logout</a>

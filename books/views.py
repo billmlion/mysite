@@ -1,8 +1,11 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response,get_object_or_404
 from django.http import HttpResponse
 from books.models import Book
+from books.models import Article
 from django.core.mail import send_mail
 from books.forms import ContactForm
+from books.forms import ArticleForm
+from books.forms import BookForm
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -69,7 +72,9 @@ def getBooks(request):
     return render_to_response('book_list.html',{"book_list":books},context_instance=RequestContext(request))
     # return render_to_response('book_list.html',{"book_list":books})
 
-
+def getBookById(request,id):
+    book = get_object_or_404(Book,pk=int(id))
+    return render_to_response('book_detail.html',{"book":book},context_instance=RequestContext(request))
 
 
 def register(request):
@@ -100,5 +105,39 @@ def login_view(request):
     else:
       return HttpResponseRedirect("/accounts/login/")
 
+def updateBook(request,id):
+    book = get_object_or_404(Book,pk=int(id))
+    if request.method=="POST":
+        form = BookForm(request.POST,instance=book)
+        if form.is_valid():
+          form.save()
+          return HttpResponseRedirect("/books")
+        else:
+          render_to_response('book_detail.html',{"form":BookForm(instance=book)},context_instance=RequestContext(request))  
+    return render_to_response('book_detail.html',{"form":BookForm(instance=book)},context_instance=RequestContext(request))
+
+
+
+def getArticle(request):
+    # if not request.user.is_authenticated():
+    #       return HttpResponseRedirect('/accounts/login/?next=%s' % request.path)
+    articles = Article.objects.all()
+    return render_to_response('article_list.html',{"article_list":articles},context_instance=RequestContext(request))
+ 
+
+
+def updateArticle(request,id):
+    if request.method == 'POST':
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+           form.cleaned_data
+           # cd.save()
+           form.save()
+           return HttpResponseRedirect("/getArticle")
+        else:
+            return render_to_response('article_form.html', {'form': form},context_instance=RequestContext(request))
+    else:
+        form = ArticleForm(initial={'headline': 'pls write your name !'})
+        return render_to_response('article_form.html', {'form': form},context_instance=RequestContext(request))
 
 

@@ -45,7 +45,6 @@ class Book(models.Model):
     publisher = models.ForeignKey(Publisher)
     publication_date = models.DateField()
     # num_page = models.IntegerField(blank=True, null=True)
-
     def __unicode__(self):
       return self.title
 
@@ -58,3 +57,10 @@ class UserProfile(models.Model):
     upf_objects = UserProfileManager()
     bl_objects = BooksLogManager()
     ccl_objects = CCLogManager()
+
+
+class Article(models.Model):
+    headline = models.CharField(max_length=200, null=True, blank=True,
+      help_text="Use puns liberally")
+    content = models.TextField()
+

@@ -1,0 +1,54 @@
+<html>
+      <head>
+       <title>book detail</title>
+      </head>
+      <style type="text/css">
+         ul.errorlist {
+           margin: 0;
+           padding: 0;
+         }
+         .errorlist li {
+           background‐ color: red;
+           color: red;
+           display: block;
+           font‐ size: 10px;
+           margin: 0 0 3px;
+           padding: 4px 5px;
+         }
+      </style>
+
+      <body>
+             <h1>add article</h1>
+               {% if form.errors %}
+                <p style="color: red;">
+                   Please correct the error{{ form.errors|pluralize }} below.
+                </p>
+             {% endif %}
+             <form action="" method="post">
+                 {% csrf_token %}
+                 <div class="field">
+                     {{ form.title.errors }}
+                     <label for="id_title">title:</label>
+                     {{ form.title }}
+                     {{ form.title.help_text }}
+                 </div>
+                 <div class="field">
+                     {{ form.publication_date.errors }}
+                     <label for="id_publication_date">publication_date:</label>
+                     {{ form.publication_date }}
+                 </div>
+                 <div class="field">
+                     {{ form.authors.errors }}
+                     <label for="id_authors">authors:</label>
+                     {{ form.authors }}
+                 </div>
+                 <div class="field">
+                     {{ form.publisher.errors }}
+                     <label for="id_publisher">publisher:</label>
+                     {{ form.publisher }}
+                 </div>
+
+                 <input type="submit" value="Submit">
+             </form>
+      </body>
+</html

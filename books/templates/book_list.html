@@ -4,7 +4,8 @@
  <p>Found {{ book_list|length }} book{{ book_list|pluralize }}.</p>
  <ul>
  {% for book in book_list %}
- <li>{{ book.title }}</li>
+ <li>{{ book.title }} <a href='{% url "updateBook" book.id %}'>修改</a></li>
+ 
  {% endfor %}
  </ul>
 

@@ -23,9 +23,14 @@ urlpatterns = patterns('',
     (r'^search-form/$', views.search_form),
     (r'^search/$',views.search),
     (r'^contact/$',views.contact),
-    (r'^books/$',views.getBooks),
+    url(r'^books/$',views.getBooks),
+
+    url(r'^updateBook/(\d+)/$',views.updateBook,name='updateBook'),
+    (r'^getBookById/(\d+)/$', views.getBookById),
+
     #use for user register
     (r'^register/$',views.register),
-
+    url(r'^getArticle/$',views.getArticle),
+    url(r'^updateArticle/(\d+)/$',views.updateArticle,name='updateArticle'),
     
 )

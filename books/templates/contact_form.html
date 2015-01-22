@@ -30,11 +30,13 @@
                      {{ form.subject.errors }}
                      <label for="id_subject">Subject:</label>
                      {{ form.subject }}
+                     {{ form.subject.help_text }}
                  </div>
                  <div class="field">
                      {{ form.email.errors }}
                      <label for="id_email">Your e‐mail address:</label>
                      {{ form.email }}
+                     {{ form.email.help_text }}
                  </div>
                  <div class="field">
                      {{ form.message.errors }}
@@ -42,9 +44,24 @@
                      {{ form.message }}
                  </div>
                  <div class="field">
-                     {{ form.c.errors }}
-                     <label for="id_contactType">contactType:</label>
-                     {{ form.contactType }}
+                     {{ form.contactDay.errors }}
+                     <label for="id_contactDay">contact day:</label>
+                     {{ form.contactDay }}
+                 </div>
+                 <div class="field">
+                     {{ form.contactTime.errors }}
+                     <label for="id_contactTime">contact Time:</label>
+                     {{ form.contactTime }}
+                 </div>
+                 <div class="field">
+                     {{ form.contactTpye.errors }}
+                     <label for="id_contactType">contact Type:</label>
+                     {{ form.contactTpye }}
+                 </div>
+                 <div class="field">
+                     {{ form.webUrl.errors }}
+                     <label for="id_webUrl">web Url:</label>
+                     {{ form.webUrl }}
                  </div>
                  <input type="submit" value="Submit">
              </form>
